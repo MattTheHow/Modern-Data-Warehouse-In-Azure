@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "Copy Sales Data",
 	"properties": {
 		"activities": [
 			{
