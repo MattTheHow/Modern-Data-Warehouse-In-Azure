@@ -1,0 +1,16 @@
+{
+	"name": "mdwa_sql_database",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "mdwa_azure_sql_database",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Sales"
+		}
+	}
+}
