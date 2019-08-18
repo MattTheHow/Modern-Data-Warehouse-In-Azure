@@ -5,10 +5,10 @@
 		"factoryName": {
 			"value": "mdwa-datafactory"
 		},
-		"mdwa_datalake_accountKey": {
+		"mdwa_azure_sql_database_connectionString": {
 			"value": ""
 		},
-		"mdwa_azure_sql_database_connectionString": {
+		"mdwa_datalake_accountKey": {
 			"value": ""
 		},
 		"mdwa_datalake_properties_typeProperties_url": {

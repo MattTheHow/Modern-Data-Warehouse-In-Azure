@@ -7,13 +7,13 @@
 			"metadata": "Data Factory Name",
 			"defaultValue": "mdwa-datafactory"
 		},
-		"mdwa_datalake_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'mdwa_datalake'"
-		},
 		"mdwa_azure_sql_database_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'mdwa_azure_sql_database'"
+		},
+		"mdwa_datalake_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'mdwa_datalake'"
 		},
 		"mdwa_datalake_properties_typeProperties_url": {
 			"type": "string",
@@ -24,6 +24,19 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/mdwa_azure_sql_database')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('mdwa_azure_sql_database_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/mdwa_datalake')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -37,19 +50,6 @@
 						"type": "SecureString",
 						"value": "[parameters('mdwa_datalake_accountKey')]"
 					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/mdwa_azure_sql_database')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('mdwa_azure_sql_database_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -105,7 +105,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"name": "[concat(parameters('factoryName'), '/Copy Sales Data')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
