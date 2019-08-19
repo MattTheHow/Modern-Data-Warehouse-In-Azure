@@ -1,5 +1,5 @@
 {
-	"name": "mdwa_datalake_delimited",
+	"name": "mdwa_datalake_delimited_simple",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "mdwa_datalake",

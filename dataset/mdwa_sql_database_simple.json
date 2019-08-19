@@ -1,5 +1,5 @@
 {
-	"name": "mdwa_sql_database",
+	"name": "mdwa_sql_database_simple",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "mdwa_azure_sql_database",

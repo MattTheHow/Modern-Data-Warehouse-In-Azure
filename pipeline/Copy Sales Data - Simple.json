@@ -1,5 +1,5 @@
 {
-	"name": "Copy Sales Data",
+	"name": "Copy Sales Data - Simple",
 	"properties": {
 		"activities": [
 			{
@@ -32,13 +32,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "mdwa_datalake_delimited",
+						"referenceName": "mdwa_datalake_delimited_simple",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "mdwa_sql_database",
+						"referenceName": "mdwa_sql_database_simple",
 						"type": "DatasetReference"
 					}
 				]
