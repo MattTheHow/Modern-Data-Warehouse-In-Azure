@@ -1,0 +1,12 @@
+{
+	"name": "mdwa_control_database",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "mdwa_control_database",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
