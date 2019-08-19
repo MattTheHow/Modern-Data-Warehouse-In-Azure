@@ -35,7 +35,10 @@
 						"referenceName": "mdwa_datalake_delimited_parameter",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileName": "DemoSales.csv"
+							"FileName": {
+								"value": "@pipeline().parameters.FileName",
+								"type": "Expression"
+							}
 						}
 					}
 				],
@@ -44,8 +47,14 @@
 						"referenceName": "mdwa_sql_database_parameter",
 						"type": "DatasetReference",
 						"parameters": {
-							"TableName": "Sales",
-							"SchemaName": "dbo"
+							"TableName": {
+								"value": "@pipeline().parameters.TableName",
+								"type": "Expression"
+							},
+							"SchemaName": {
+								"value": "@pipeline().parameters.SchemaName",
+								"type": "Expression"
+							}
 						}
 					}
 				]
