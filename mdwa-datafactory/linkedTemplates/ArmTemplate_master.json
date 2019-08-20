@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'mdwa_datalake'"
 		},
+		"mdwa_control_database_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'mdwa_control_database'"
+		},
 		"mdwa_datalake_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://mdwastorage.dfs.core.windows.net"
@@ -51,6 +55,9 @@
 					},
 					"mdwa_datalake_accountKey": {
 						"value": "[parameters('mdwa_datalake_accountKey')]"
+					},
+					"mdwa_control_database_connectionString": {
+						"value": "[parameters('mdwa_control_database_connectionString')]"
 					},
 					"mdwa_datalake_properties_typeProperties_url": {
 						"value": "[parameters('mdwa_datalake_properties_typeProperties_url')]"

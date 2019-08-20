@@ -11,6 +11,9 @@
 		"mdwa_datalake_accountKey": {
 			"value": ""
 		},
+		"mdwa_control_database_connectionString": {
+			"value": ""
+		},
 		"mdwa_datalake_properties_typeProperties_url": {
 			"value": "https://mdwastorage.dfs.core.windows.net"
 		},
