@@ -62,13 +62,16 @@
 		],
 		"parameters": {
 			"SchemaName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Stage"
 			},
 			"TableName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Sales"
 			},
 			"FileName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "DemoSales.csv"
 			}
 		},
 		"annotations": []
