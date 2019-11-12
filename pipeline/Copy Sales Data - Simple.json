@@ -26,7 +26,8 @@
 						}
 					},
 					"sink": {
-						"type": "AzureSqlSink"
+						"type": "AzureSqlSink",
+						"sqlWriterStoredProcedureName": "[Clean].[CleanSales]"
 					},
 					"enableStaging": false
 				},
