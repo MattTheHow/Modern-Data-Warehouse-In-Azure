@@ -1,0 +1,98 @@
+{
+	"name": "Get Metadata",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Metadata",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "mdwa_datalake_delimited_parameter",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": "DemoSales.csv"
+						}
+					},
+					"fieldList": [
+						"columnCount",
+						"itemName"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "Check File Metadata",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "Audit.CheckFileMetadata",
+					"storedProcedureParameters": {
+						"ColumnCount": {
+							"value": {
+								"value": "@activity('Get Metadata').output.columnCount",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"Filename": {
+							"value": {
+								"value": "@activity('Get Metadata').output.itemName",
+								"type": "Expression"
+							},
+							"type": "test"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "mdwa_control_database",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"SchemaName": {
+				"type": "string",
+				"defaultValue": "Stage"
+			},
+			"TableName": {
+				"type": "string",
+				"defaultValue": "Sales"
+			},
+			"FileName": {
+				"type": "string",
+				"defaultValue": "DemoSales.csv"
+			}
+		},
+		"annotations": []
+	}
+}

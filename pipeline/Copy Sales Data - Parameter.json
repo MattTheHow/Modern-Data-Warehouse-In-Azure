@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy Sales Data - Parameter",
+				"name": "Copy Data",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
