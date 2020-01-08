@@ -1,5 +1,5 @@
 {
-	"name": "mdwa_datalake_delimited_simple",
+	"name": "DirtyCSVFile",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "mdwa_datalake",
@@ -19,6 +19,31 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "SalesSystemId",
+				"type": "String"
+			},
+			{
+				"name": "SalesPerson",
+				"type": "String"
+			},
+			{
+				"name": "SalesAmount",
+				"type": "String"
+			},
+			{
+				"name": "ProductName",
+				"type": "String"
+			},
+			{
+				"name": "ProductId",
+				"type": "String"
+			},
+			{
+				"name": "CustomerId",
+				"type": "String"
+			}
+		]
 	}
 }

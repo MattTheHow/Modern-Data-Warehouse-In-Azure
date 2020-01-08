@@ -1,0 +1,35 @@
+{
+	"name": "Cleansing Data Flow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DirtyCSVFile",
+						"type": "DatasetReference"
+					},
+					"name": "DirtyCSVFile"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "mdwa_sql_database_simple",
+						"type": "DatasetReference"
+					},
+					"name": "DirtyCSVFileSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "TrimColumns"
+				},
+				{
+					"name": "StandardiseNulls"
+				}
+			],
+			"script": "\n\nsource(output(\n\t\tSalesSystemId as string,\n\t\tSalesPerson as string,\n\t\tSalesAmount as string,\n\t\tProductName as string,\n\t\tProductId as string,\n\t\tCustomerId as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false) ~> DirtyCSVFile\nDirtyCSVFile derive(SalesSystemId = trim(SalesSystemId),\n\t\tSalesPerson = trim(SalesPerson),\n\t\tSalesAmount = trim(SalesAmount),\n\t\tProductName = trim(ProductName),\n\t\tProductId = trim(ProductId),\n\t\tCustomerId = trim(CustomerId)) ~> TrimColumns\nTrimColumns derive(SalesSystemId = toInteger(replace(replace(SalesSystemId, ' ',''),'Unknown','')),\n\t\tSalesPerson = replace(replace(SalesPerson, ' ',''),'Unknown',''),\n\t\tSalesAmount = toDecimal(replace(replace(SalesAmount, ' ',''),'Unknown','')),\n\t\tProductName = replace(replace(ProductName, ' ',''),'Unknown',''),\n\t\tProductId = toInteger(replace(replace(ProductId, ' ',''),'Unknown','')),\n\t\tCustomerId = toInteger(replace(replace(CustomerId, ' ',''),'Unknown',''))) ~> StandardiseNulls\nStandardiseNulls sink(allowSchemaDrift: false,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tSalesSystemId,\n\t\tSalesPerson,\n\t\tSalesAmount,\n\t\tProductName,\n\t\tProductId,\n\t\tCustomerId = StandardiseNulls@CustomerId\n\t)) ~> DirtyCSVFileSink"
+		}
+	}
+}
