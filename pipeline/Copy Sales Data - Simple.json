@@ -33,7 +33,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "mdwa_datalake_delimited_simple",
+						"referenceName": "DirtyCSVFile",
 						"type": "DatasetReference"
 					}
 				],
