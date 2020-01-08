@@ -7,7 +7,37 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "SalesSystemId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SalesPerson",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SalesAmount",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "ProductName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ProductId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CustomerId",
+				"type": "int",
+				"precision": 10
+			}
+		],
 		"typeProperties": {
 			"schema": "dbo",
 			"table": "Sales"
