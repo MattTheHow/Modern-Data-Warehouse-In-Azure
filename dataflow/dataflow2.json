@@ -22,7 +22,7 @@
 				}
 			],
 			"transformations": [],
-			"script": "\n\nsource(output(\n\t\tSalesSystemId as integer,\n\t\tSalesPerson as string,\n\t\tSalesAmount as decimal(10,2),\n\t\tProductName as string,\n\t\tProductId as integer,\n\t\tCustomerId as integer\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> SQLDataSource\nSQLDataSource sink(input(\n\t\tSalesSystemId as string,\n\t\tSalesPerson as string,\n\t\tSalesAmount as string,\n\t\tProductName as string,\n\t\tProductId as string,\n\t\tCustomerId as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tpartitionBy('hash', 10,\n\t\tProductId\n\t)) ~> PartitionedDataSet"
+			"script": "\n\nsource(output(\n\t\tSalesSystemId as integer,\n\t\tSalesPerson as string,\n\t\tSalesAmount as decimal(10,2),\n\t\tProductName as string,\n\t\tProductId as integer,\n\t\tCustomerId as integer\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> SQLDataSource\nSQLDataSource sink(input(\n\t\tSalesSystemId as string,\n\t\tSalesPerson as string,\n\t\tSalesAmount as string,\n\t\tProductName as string,\n\t\tProductId as string,\n\t\tCustomerId as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tpartitionBy('key',\n\t\t0,\n\t\tCustomerId\n\t)) ~> PartitionedDataSet"
 		}
 	}
 }
