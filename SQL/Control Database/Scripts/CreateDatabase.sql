@@ -42,11 +42,12 @@ CREATE TABLE Metadata.EntityColumn
 	 EntityColumnId INT IDENTITY(1,1) NOT NULL
 	,EntityColumnName VARCHAR(100) NOT NULL
 	,EntityId INT NOT NULL
-	,EntitySchemaVersion INT NOT NULL
 	,ColumnDataType VARCHAR(100) NOT NULL
-	,ColumnTypeLength INT NOT NULL
+	,ColumnTypeLength INT NULL
+	,ColumnPrecision VARCHAR(10) NULL
 	,ColumnOrder INT NOT NULL
 	,isPrimaryKey BIT NOT NULL
+	,isMapped BIT NOT NULL
 
 	,CONSTRAINT pk_EntityColumn PRIMARY KEY (EntityColumnId)
 	,CONSTRAINT fk_EntityColumn_Entity FOREIGN KEY (EntityId) REFERENCES Metadata.Entity (EntityId)
@@ -93,12 +94,12 @@ BEGIN
 		 e.EntityId
 		,e.EntityType
 		,ec.EntityColumnName
-		,ec.EntitySchemaVersion
 		,ec.ColumnDataType
 		,ec.ColumnTypeLength
+		,ec.ColumnPrecision
 		,ec.ColumnOrder
 		,ec.isPrimaryKey
-		,rd.RuleDefinition
+		,ec.isMapped
 	FROM Metadata.Entity AS e
 		INNER JOIN Metadata.EntityColumn AS ec
 			ON ec.EntityId = e.EntityId
@@ -132,12 +133,12 @@ GO
 
 INSERT INTO Metadata.EntityColumn
 VALUES
-	('SalesSystemId', 1, 0, 'INTEGER', 0),
-	('SalesPerson', 1, 0, 'NVARCHAR(100)',1),
-	('SalesAmount', 1, 0, 'DECIMAL(10,2)',2),
-	('ProductName', 1, 0, 'NVARCHAR(100)',3),
-	('ProductId', 1, 0, 'INTEGER',4),
-	('CustomerId',1, 0, 'INTEGER',5)
+	('SalesSystemId', 1,'INTEGER',NULL,NULL,		0, 1, 1),
+	('SalesPerson', 1,	'NVARCHAR',100,NULL,		1, 0, 1),
+	('SalesAmount', 1,	'DECIMAL',NULL,'(10,2)',	2, 0, 1),
+	('ProductName', 1,	'NVARCHAR',100,NULL,		3, 0, 1),
+	('ProductId', 1,	'INTEGER',NULL,NULL,		4, 0, 1),
+	('CustomerId',1,	'INTEGER',NULL,NULL,		5, 0, 1)
 GO
 
 INSERT INTO Metadata.RuleDefinition
