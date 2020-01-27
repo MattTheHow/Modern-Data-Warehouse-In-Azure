@@ -44,7 +44,9 @@ CREATE TABLE Metadata.EntityColumn
 	,EntityId INT NOT NULL
 	,EntitySchemaVersion INT NOT NULL
 	,ColumnDataType VARCHAR(100) NOT NULL
+	,ColumnTypeLength INT NOT NULL
 	,ColumnOrder INT NOT NULL
+	,isPrimaryKey BIT NOT NULL
 
 	,CONSTRAINT pk_EntityColumn PRIMARY KEY (EntityColumnId)
 	,CONSTRAINT fk_EntityColumn_Entity FOREIGN KEY (EntityId) REFERENCES Metadata.Entity (EntityId)
@@ -75,35 +77,44 @@ GO
 
 CREATE PROC Metadata.ObtainEntityMetadata
 (
-	@EntityName VARCHAR(100) = NULL
+	@EntityId INT = NULL
 )
 
 AS
 BEGIN
 
 	SELECT
-		 e.EntityName
+		 e.EntityId
 		,e.EntityType
 	FROM Metadata.Entity AS e
-	WHERE EntityName = COALESCE(@EntityName, EntityName)
+	WHERE e.EntityId = COALESCE(@EntityId, e.EntityId)
 
 	SELECT
-		 e.EntityName
+		 e.EntityId
 		,e.EntityType
 		,ec.EntityColumnName
 		,ec.EntitySchemaVersion
 		,ec.ColumnDataType
+		,ec.ColumnTypeLength
 		,ec.ColumnOrder
+		,ec.isPrimaryKey
 		,rd.RuleDefinition
 	FROM Metadata.Entity AS e
 		INNER JOIN Metadata.EntityColumn AS ec
 			ON ec.EntityId = e.EntityId
+	WHERE e.EntityId = COALESCE(@EntityId, e.EntityId)
+	ORDER BY ColumnOrder
+	
+	SELECT
+		 ec.EntityColumnName
+		,rd.RuleDefinition
+		,cr.RuleOrder
+	FROM Metadata.EntityColumn AS ec
 		INNER JOIN Metadata.ColumnRule AS cr
 			ON cr.EntityColumnId = ec.EntityColumnId
 		INNER JOIN Metadata.RuleDefinition AS rd
 			ON rd.RuleId = cr.RuleId
-	WHERE EntityName = COALESCE(@EntityName, EntityName)
-	ORDER BY ColumnOrder, RuleOrder
+	ORDER BY ec.EntityColumnId ASC, cr.RuleOrder ASC
 
 END
 GO
