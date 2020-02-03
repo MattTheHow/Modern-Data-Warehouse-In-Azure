@@ -1,0 +1,60 @@
+{
+	"name": "Pause Synapse Analytics",
+	"properties": {
+		"activities": [
+			{
+				"name": "Pause Synapse Analytics",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Obtain Bearer Token",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://management.azure.com/subscriptions/d6c9085f-1bef-4f0b-85e8-a30400cbbd0c/resourceGroups/moderndw/providers/Microsoft.Sql/servers/mdwa-sqlserver.database.windows.net/databases/mdwa-sqlwarehouse/pause?api-version=2017-10-01-preview ",
+					"method": "POST",
+					"headers": {
+						"Authorization": {
+							"value": "@concat('Bearer ', activity('Obtain Bearer Token').output.access_token)",
+							"type": "Expression"
+						},
+						"Content-Type": "application/json"
+					}
+				}
+			},
+			{
+				"name": "Obtain Bearer Token",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://login.microsoftonline.com/6771b25a-f4d8-4f9f-9fcc-e7468a5cdc46/oauth2/token",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": "grant_type=client_credentials&client_id=320a7909-de06-4b4c-bd59-5523947e9319&client_secret=-7]345RybyzoGoQUAjedEPuvMazHjo@@&resource=https%3A%2F%2Fmanagement.azure.com"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
