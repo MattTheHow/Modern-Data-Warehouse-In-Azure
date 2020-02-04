@@ -4,20 +4,20 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory Name",
+			"metadata": "Data Factory name",
 			"defaultValue": "mdwa-datafactory"
 		},
 		"mdwa_azure_sql_database_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'mdwa_azure_sql_database'"
 		},
-		"mdwa_datalake_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'mdwa_datalake'"
-		},
 		"mdwa_control_database_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'mdwa_control_database'"
+		},
+		"mdwa_datalake_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'mdwa_datalake'"
 		},
 		"mdwa_datalake_properties_typeProperties_url": {
 			"type": "string",
@@ -29,7 +29,7 @@
 		},
 		"containerSasToken": {
 			"type": "string",
-			"metadata": "Sas Token to storage account containing linked ARM templates"
+			"metadata": "Sas token to storage account containing linked ARM templates"
 		}
 	},
 	"variables": {
@@ -53,11 +53,11 @@
 					"mdwa_azure_sql_database_connectionString": {
 						"value": "[parameters('mdwa_azure_sql_database_connectionString')]"
 					},
-					"mdwa_datalake_accountKey": {
-						"value": "[parameters('mdwa_datalake_accountKey')]"
-					},
 					"mdwa_control_database_connectionString": {
 						"value": "[parameters('mdwa_control_database_connectionString')]"
+					},
+					"mdwa_datalake_accountKey": {
+						"value": "[parameters('mdwa_datalake_accountKey')]"
 					},
 					"mdwa_datalake_properties_typeProperties_url": {
 						"value": "[parameters('mdwa_datalake_properties_typeProperties_url')]"
