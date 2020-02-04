@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "Pause Synapse Analytics",
+				"description": "",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
