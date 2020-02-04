@@ -55,6 +55,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"InstanceName": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
