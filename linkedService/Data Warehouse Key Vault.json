@@ -1,0 +1,10 @@
+{
+	"name": "Data Warehouse Key Vault",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://OS-training-keyvault-mh.vault.azure.net/"
+		}
+	}
+}
