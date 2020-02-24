@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT \n\tCustomerKey,\n\tSUM(SalesAmount) AS TotalSalesAmount,\n\tCOUNT(*) AS OrderCount\nFROM \n\t[dbo].[FactInternetSales]\nGROUP BY CustomerKey",
+						"sqlReaderQuery": "SELECT TOP 10\n\tCustomerKey,\n\tSUM(SalesAmount) AS TotalSalesAmount,\n\tCOUNT(*) AS OrderCount\nFROM \n\t[dbo].[FactInternetSales]\nGROUP BY CustomerKey",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
