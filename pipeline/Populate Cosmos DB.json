@@ -1,0 +1,45 @@
+{
+	"name": "Populate Cosmos DB",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Warehouse Data",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT \n\tCustomerKey,\n\tSUM(SalesAmount) AS TotalSalesAmount,\n\tCOUNT(*) AS OrderCount\nFROM \n\t[dbo].[FactInternetSales]\nGROUP BY CustomerKey",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "CosmosDbSqlApiSink",
+						"writeBehavior": "insert"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "mdwa_sql_database_simple",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "mdwa_cosmos_db",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
