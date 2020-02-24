@@ -1,0 +1,14 @@
+{
+	"name": "mdwa_cosmos_db",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CosmosDb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "CosmosDbSqlApiCollection",
+		"typeProperties": {
+			"collectionName": "mdwa"
+		}
+	}
+}
