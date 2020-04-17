@@ -24,6 +24,19 @@
 						"computeType": "General"
 					}
 				}
+			},
+			{
+				"name": "Switch1",
+				"type": "Switch",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"cases": [
+						{
+							"value": "8"
+						}
+					]
+				}
 			}
 		],
 		"annotations": []
